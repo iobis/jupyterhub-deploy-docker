@@ -42,6 +42,7 @@ services:
       DOCKER_NOTEBOOK_DIR: /home/jovyan/work
       # Docker volume for user notebooks
       DOCKER_NOTEBOOK_VOLUME: /Users/pieter/Desktop/jupyterhub-deploy-docker/basic-example/data/jupyterhub-user-{username} # jupyterhub-user-{username}
+      DOCKER_NOTEBOOK_VOLUME_SHARED: /Users/pieter/Desktop/jupyterhub-deploy-docker/basic-example/data/shared
 
 volumes:
   jupyterhub-data:
