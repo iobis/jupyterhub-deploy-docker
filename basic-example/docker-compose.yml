@@ -5,6 +5,11 @@
 version: "3"
 
 services:
+  obis-notebook:
+    build:
+      context: .
+      dockerfile: Dockerfile.obis-notebook
+    image: obis-notebook:latest
   hub:
     build:
       context: .
@@ -32,7 +37,7 @@ services:
       # All containers will join this network
       DOCKER_NETWORK_NAME: jupyterhub-network
       # JupyterHub will spawn this Notebook image for users
-      DOCKER_NOTEBOOK_IMAGE: jupyter/r-notebook:latest
+      DOCKER_NOTEBOOK_IMAGE: obis-notebook:latest # jupyter/r-notebook:latest
       # Notebook directory inside user image
       DOCKER_NOTEBOOK_DIR: /home/jovyan/work
       # Docker volume for user notebooks

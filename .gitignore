@@ -3,4 +3,4 @@ userlist
 .DS_Store
 __pycache__/
 basic-example/data
-
+*.log

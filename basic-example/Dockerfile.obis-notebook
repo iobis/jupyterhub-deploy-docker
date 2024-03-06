@@ -1,0 +1,24 @@
+FROM jupyter/minimal-notebook
+
+USER root
+
+RUN apt-get update --yes && \
+    apt-get install --yes --no-install-recommends \
+    libpq-dev \
+    libgdal-dev \
+    libudunits2-dev \
+    libfontconfig1-dev \
+    libgit2-dev \
+    libharfbuzz-dev \
+    libfribidi-dev \
+    r-base \
+    gfortran \
+    gcc \
+    build-essential && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN R -e 'install.packages(c("IRkernel", "devtools", "tidyverse", "sf", "terra", "robis"), repos = "http://cran.us.r-project.org")'
+
+USER ${NB_UID}
+
+RUN R -e 'IRkernel::installspec()'
