@@ -55,7 +55,7 @@ c.JupyterHub.db_url = "sqlite:////data/jupyterhub.sqlite"
 c.JupyterHub.authenticator_class = "nativeauthenticator.NativeAuthenticator"
 
 # Allow anyone to sign-up without approval
-c.NativeAuthenticator.open_signup = True
+c.NativeAuthenticator.open_signup = False
 
 # Allowed admins
 admin = os.environ.get("JUPYTERHUB_ADMIN")
