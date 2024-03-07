@@ -1,4 +1,4 @@
-FROM jupyter/minimal-notebook
+FROM quay.io/jupyter/minimal-notebook
 
 USER root
 
@@ -18,6 +18,8 @@ RUN apt-get update --yes && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN R -e 'install.packages(c("IRkernel", "devtools", "tidyverse", "sf", "terra", "robis"), repos = "http://cran.us.r-project.org")'
+
+RUN ln -s /home/jovyan/shared /home/jovyan/work/shared
 
 USER ${NB_UID}
 

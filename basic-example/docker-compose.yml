@@ -28,7 +28,7 @@ services:
       # within the container
       - "/var/run/docker.sock:/var/run/docker.sock:rw"
       # Bind Docker volume on host for JupyterHub database and cookie secrets
-      - "./data/jupyterhub-data:/data"
+      - "jupyterhub-data:/data"
     ports:
       - "8000:8000"
     environment:
@@ -37,12 +37,15 @@ services:
       # All containers will join this network
       DOCKER_NETWORK_NAME: jupyterhub-network
       # JupyterHub will spawn this Notebook image for users
-      DOCKER_NOTEBOOK_IMAGE: obis-notebook:latest # jupyter/r-notebook:latest
+      DOCKER_NOTEBOOK_IMAGE: obis-notebook:latest
+      # DOCKER_NOTEBOOK_IMAGE: quay.io/jupyter/minimal-notebook
       # Notebook directory inside user image
       DOCKER_NOTEBOOK_DIR: /home/jovyan/work
       # Docker volume for user notebooks
-      DOCKER_NOTEBOOK_VOLUME: /Users/pieter/Desktop/jupyterhub-deploy-docker/basic-example/data/jupyterhub-user-{username} # jupyterhub-user-{username}
-      DOCKER_NOTEBOOK_VOLUME_SHARED: /Users/pieter/Desktop/jupyterhub-deploy-docker/basic-example/data/shared
+      DOCKER_NOTEBOOK_VOLUME: jupyterhub-user-{username}
+
+      DOCKER_SHARED_VOLUME: /data/shared
+      DOCKER_SHARED_DIR: /home/jovyan/shared
 
 volumes:
   jupyterhub-data:
