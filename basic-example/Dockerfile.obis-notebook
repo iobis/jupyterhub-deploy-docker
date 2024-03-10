@@ -17,9 +17,11 @@ RUN apt-get update --yes && \
     build-essential && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN R -e 'install.packages(c("IRkernel", "devtools", "tidyverse", "sf", "terra", "robis"), repos = "http://cran.us.r-project.org")'
+RUN R -e 'install.packages(c("IRkernel", "devtools", "tidyverse", "sf", "terra", "arrow", "ggplot2", "robis"), repos = "http://cran.us.r-project.org")'
 
 RUN ln -s /home/jovyan/shared /home/jovyan/work/shared
+RUN ln -s /home/jovyan/data /home/jovyan/work/data
+RUN chmod -R 777 /usr/local/lib/R/site-library
 
 USER ${NB_UID}
 

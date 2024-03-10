@@ -46,6 +46,8 @@ services:
 
       DOCKER_SHARED_VOLUME: /data/shared
       DOCKER_SHARED_DIR: /home/jovyan/shared
+      DOCKER_DATA_VOLUME: /data/data
+      DOCKER_DATA_DIR: /home/jovyan/data
 
 volumes:
   jupyterhub-data:

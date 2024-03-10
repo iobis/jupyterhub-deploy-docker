@@ -31,9 +31,11 @@ c.DockerSpawner.notebook_dir = notebook_dir
 # Mount the real user's Docker volume on the host to the notebook user's
 # notebook directory in the container
 shared_dir = os.environ.get("DOCKER_SHARED_DIR", "/home/jovyan/shared")
+data_dir = os.environ.get("DOCKER_DATA_DIR", "/home/jovyan/data")
 c.DockerSpawner.volumes = {
     os.environ.get("DOCKER_NOTEBOOK_VOLUME"): notebook_dir,
     os.environ.get("DOCKER_SHARED_VOLUME"): shared_dir,
+    os.environ.get("DOCKER_DATA_VOLUME"): data_dir,
 }
 
 # Remove containers once they are stopped
