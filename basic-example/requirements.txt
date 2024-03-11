@@ -1,0 +1,7 @@
+xarray
+zarr
+netCDF4
+pandas
+numpy
+scikit-learn
+geopandas

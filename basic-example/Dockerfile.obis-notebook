@@ -2,6 +2,11 @@ FROM quay.io/jupyter/minimal-notebook
 
 USER root
 
+COPY --chown=${NB_UID}:${NB_GID} requirements.txt /tmp/
+RUN pip install --no-cache-dir --requirement /tmp/requirements.txt && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
     libpq-dev \
@@ -17,11 +22,12 @@ RUN apt-get update --yes && \
     build-essential && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN R -e 'install.packages(c("IRkernel", "devtools", "tidyverse", "sf", "terra", "arrow", "ggplot2", "robis"), repos = "http://cran.us.r-project.org")'
+RUN R -e 'install.packages(c("IRkernel", "remotes", "devtools", "tidyverse", "sf", "terra", "arrow", "ggplot2", "worrms", "leaflet", "robis"), repos = "http://cran.us.r-project.org")'
 
 RUN ln -s /home/jovyan/shared /home/jovyan/work/shared
 RUN ln -s /home/jovyan/data /home/jovyan/work/data
-RUN chmod -R 777 /usr/local/lib/R/site-library
+# RUN chmod -R 777 /usr/local/lib/R/site-library
+RUN fix-permissions "/usr/local/lib/R/site-library"
 
 USER ${NB_UID}
 

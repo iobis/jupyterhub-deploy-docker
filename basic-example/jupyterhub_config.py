@@ -46,6 +46,9 @@ c.DockerSpawner.debug = True
 
 c.DockerSpawner.start_timeout = 180
 
+C.DockerSpawner.mem_limit = "2G"
+C.DockerSpawner.cpu_limit = "1"
+
 # User containers will access hub by container name on the Docker network
 c.JupyterHub.hub_ip = "jupyterhub"
 c.JupyterHub.hub_port = 8080
