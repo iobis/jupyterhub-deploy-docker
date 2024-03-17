@@ -25,7 +25,8 @@ RUN apt-get update --yes && \
 
 RUN R -e 'install.packages(c("IRkernel", "remotes", "devtools", "tidyverse", "sf", "terra", "arrow", "ggplot2", "worrms", "leaflet", "seqinr", "BiocManager", "robis"), repos = "http://cran.us.r-project.org")'
 RUN R -e 'remotes::install_github("iobis/obistools")'
-RUN R -e 'BiocManager::install("phyloseq")'
+RUN R -e 'remotes::install_github("pieterprovoost/r-dwca-writer")'
+RUN R -e 'BiocManager::install(c("phyloseq", "Biostrings"))'
 
 RUN ln -s /home/jovyan/shared /home/jovyan/work/shared
 RUN ln -s /home/jovyan/data /home/jovyan/work/data
