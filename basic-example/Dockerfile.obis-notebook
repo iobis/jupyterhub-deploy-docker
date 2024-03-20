@@ -30,6 +30,7 @@ RUN R -e 'BiocManager::install(c("phyloseq", "Biostrings"))'
 
 RUN ln -s /home/jovyan/shared /home/jovyan/work/shared
 RUN ln -s /home/jovyan/data /home/jovyan/work/data
+RUN ln -s /home/jovyan/scratch /home/jovyan/work/scratch
 RUN fix-permissions "/usr/local/lib/R/site-library"
 
 USER ${NB_UID}

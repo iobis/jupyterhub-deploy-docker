@@ -48,6 +48,8 @@ services:
       DOCKER_SHARED_DIR: /home/jovyan/shared
       DOCKER_DATA_VOLUME: /data/data
       DOCKER_DATA_DIR: /home/jovyan/data
+      DOCKER_SCRATCH_VOLUME: /data/scratch
+      DOCKER_SCRATCH_DIR: /home/jovyan/scratch
 
 volumes:
   jupyterhub-data:
