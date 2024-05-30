@@ -66,3 +66,5 @@ c.NativeAuthenticator.open_signup = False
 admin = os.environ.get("JUPYTERHUB_ADMIN")
 if admin:
     c.Authenticator.admin_users = [admin]
+
+c.FileContentsManager.always_delete_dir = True
