@@ -1,4 +1,4 @@
-FROM quay.io/jupyter/minimal-notebook
+FROM quay.io/jupyter/minimal-notebook:latest
 
 USER root
 
@@ -24,10 +24,13 @@ RUN apt-get update --yes && \
     build-essential && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN R -e 'install.packages(c("IRkernel", "remotes", "devtools", "tidyverse", "sf", "terra", "arrow", "ggplot2", "worrms", "leaflet", "seqinr", "BiocManager", "robis"), repos = "http://cran.us.r-project.org")'
-RUN R -e 'remotes::install_github("iobis/obistools")'
-RUN R -e 'remotes::install_github("pieterprovoost/r-dwca-writer")'
-RUN R -e 'BiocManager::install(c("phyloseq", "Biostrings"))'
+RUN wget https://github.com/marbl/Krona/archive/refs/tags/v2.8.1.tar.gz && \
+    tar -xvzf v2.8.1.tar.gz && \
+    cd Krona-2.8.1/KronaTools/ && \
+    ./install.pl && \
+    rm ../../v2.8.1.tar.gz
+
+RUN R -e 'install.packages(c("IRkernel", "remotes", "devtools", "tidyverse", "sf", "terra", "arrow", "ggplot2", "worrms", "leaflet", "seqinr", "BiocManager", "robis"), repos = "http://cran.us.r-project.org"); BiocManager::install(c("phyloseq", "Biostrings")); library(remotes); install_github("iobis/obistools"); install_github("pieterprovoost/r-dwca-writer"); install_github("cpauvert/psadd")'
 
 RUN ln -s /home/jovyan/shared /home/jovyan/work/shared
 RUN ln -s /home/jovyan/data /home/jovyan/work/data
